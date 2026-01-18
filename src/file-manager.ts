@@ -305,7 +305,7 @@ export class FileManager {
 					const allowDelete = properties.allowDelete
 						? properties.allowDelete
 								.toLowerCase()
-								.replace('"', "") === "true"
+								.replace(/"/g, "") === "true"
 						: repo.allowDeleteIssue;
 
 					if (allowDelete) {
@@ -350,7 +350,7 @@ export class FileManager {
 					const allowDelete = properties.allowDelete
 						? properties.allowDelete
 								.toLowerCase()
-								.replace('"', "") === "true"
+								.replace(/"/g, "") === "true"
 						: repo.allowDeletePullRequest;
 
 					if (allowDelete) {
@@ -413,7 +413,7 @@ export class FileManager {
 				}
 
 				const updateMode = updateModeText
-					? updateModeText.toLowerCase().replace('"', "")
+					? updateModeText.toLowerCase().replace(/"/g, "")
 					: repo.issueUpdateMode;
 
 				if (updateMode === "update") {
@@ -531,7 +531,7 @@ export class FileManager {
 				}
 
 				const updateMode = updateModeText
-					? updateModeText.toLowerCase().replace('"', "")
+					? updateModeText.toLowerCase().replace(/"/g, "")
 					: repo.pullRequestUpdateMode;
 
 				if (updateMode === "update") {
@@ -710,7 +710,7 @@ ${this.formatComments(comments, this.settings.escapeMode)}
 						const allowDelete = properties.allowDelete
 							? properties.allowDelete
 									.toLowerCase()
-									.replace('"', "") === "true"
+									.replace(/"/g, "") === "true"
 							: false;
 
 						if (allowDelete) {
@@ -771,7 +771,7 @@ ${this.formatComments(comments, this.settings.escapeMode)}
 						const allowDelete = properties.allowDelete
 							? properties.allowDelete
 									.toLowerCase()
-									.replace('"', "") === "true"
+									.replace(/"/g, "") === "true"
 							: false;
 
 						if (allowDelete) {

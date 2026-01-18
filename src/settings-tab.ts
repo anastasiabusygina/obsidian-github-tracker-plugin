@@ -45,6 +45,28 @@ export class GitHubTrackerSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
+			.setName("Auto-sync interval (minutes)")
+			.setDesc(
+				"Automatically sync every N minutes. Set to 0 to disable auto-sync."
+			)
+			.addText((text) =>
+				text
+					.setPlaceholder("0")
+					.setValue(String(this.plugin.settings.syncInterval))
+					.onChange(async (value) => {
+						const interval = parseInt(value);
+						if (!isNaN(interval) && interval >= 0) {
+							this.plugin.settings.syncInterval = interval;
+							await this.plugin.saveSettings();
+							// Reload plugin to apply new interval
+							new Notice(
+								"Sync interval updated. Please reload Obsidian or restart the plugin for changes to take effect."
+							);
+						}
+					})
+			);
+
+		new Setting(containerEl)
 			.setName("Sync notice mode")
 			.setDesc("Control the level of notifications shown during sync")
 			.addDropdown((dropdown) => {
