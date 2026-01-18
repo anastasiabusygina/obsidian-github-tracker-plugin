@@ -66,6 +66,18 @@ export default class GitHubTrackerPlugin extends Plugin {
 			);
 		}
 
+		// Setup auto-sync interval if enabled
+		if (this.settings.syncInterval > 0 && this.gitHubClient?.isReady()) {
+			this.registerInterval(
+				window.setInterval(
+					async () => {
+						await this.sync();
+					},
+					this.settings.syncInterval * 60 * 1000
+				)
+			);
+		}
+
 		// Add ribbon icon
 		const ribbonIconEl = this.addRibbonIcon(
 			"sync",
