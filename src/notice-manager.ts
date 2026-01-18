@@ -16,13 +16,12 @@ export class NoticeManager {
   public showNotice(message: string, level: NoticeLevel = "info", forceShow = false): void {
     // Always log debug messages to console if in debug mode
     if (this.settings.syncNoticeMode === "debug") {
-      const prefix = `[GitHub Tracker] ${level.toUpperCase()}:`;
-      if (level === "error") {
-        console.error(prefix, message);
+        if (level === "error") {
+        console.error("[GitHub Tracker] %s:", level.toUpperCase(), message);
       } else if (level === "warning") {
-        console.warn(prefix, message); 
+        console.warn("[GitHub Tracker] %s:", level.toUpperCase(), message); 
       } else {
-        console.log(prefix, message);
+        console.log("[GitHub Tracker] %s:", level.toUpperCase(), message);
       }
     }
 
